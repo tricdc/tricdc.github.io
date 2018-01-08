@@ -35,7 +35,7 @@
             });
 
             $(document).ready(function(){
-                $('#headerDisplay').html("<mark><b>" + miner + "</b></mark>");
+                $('#headerDisplay').html("<span><b>" + miner + "</b></span>");
                 $('.dropdown-menu').on('click', 'a', function(){
                     updateWorker($(this).attr('listid'));
                 });
@@ -91,7 +91,7 @@
     <div class="vertical-center">
         <div class="container text-center">
             <div class="card align-middle">
-                <div class="card-header">
+                <div class="bg-warning card-header">
                     <span id="headerDisplay"></span>
                 </div>
                 <div class="card-body text-left">
