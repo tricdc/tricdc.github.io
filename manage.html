@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+            crossorigin="anonymous">
+        <link rel="stylesheet" href="css/manage.css" />
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+        <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl"
+            crossorigin="anonymous"></script>
+        <script defer type="text/javascript" src="./js/contractInfo.js"></script>
+        <script defer type="text/javascript" src="./js/web3.min.js"></script>
+        <script defer type="text/javascript" src="./js/manage.js"></script>
+
+        <title>ShipEth</title>
+    </head>
+    <body class="bg-light">
+        <div id="mainContainer" class="container invisible">
+            <div class="row justify-content-center">
+                <div class="col-sm-12 col-xs-6 col-md-9 col-lg-7 col-xl-8 p-5">
+                    <div class="text-center">
+                        <h4 id="addressText">0xBF486FB1a8c4659BA9e90dcf69b1FB6cB3378E06</h1>
+                        <hr>
+                        <h3 id="statusText">Waiting for payment...</h3>
+                    </div>
+                    <form class="p-3">
+                        <div class="form-group row">
+                            <label for="priceInput" class="text col-sm-4 col-form-label">
+                                <b>Pay for item</b>
+                            </label>
+                            <div class="col-sm-8">
+                                <button id="payButton" onclick="pay()" type="button" class="btn btn-outline-primary"></button>
+                                <small id="usdValueText" class="form-text text-muted"></small>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="priceInput" class="col-sm-4 col-form-label">
+                                Cancel order
+                            </label>
+                            <div class="col-sm-8">
+                                <button id="cancelButton" type="button" class="btn btn-outline-danger">Cancel order</button>
+                                <small class="form-text text-muted"></small>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="priceInput" class="col-sm-4 col-form-label">
+                                Add tracking
+                            </label>
+                            <div class="col-sm-8">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <button id="addButton" onclick="validateTracking()" class="btn btn-outline-secondary" type="button" disabled>Add</button>
+                                    </div>
+                                    <input id="trackingInput" onblur="resetTrackingColor()" type="text" class="form-control" placeholder="tracking number" aria-label="" aria-describedby="basic-addon1" disabled>
+                                </div>
+                                <div id="checkBoxes" onclick="resetRadioColors()">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="shipperOptions" id="upsButton" value="ups" disabled>
+                                        <label class="form-check-label" for="upsButton"><span id="upsButtonText">UPS</span></label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="shipperOptions" id="uspsButton" value="usps" disabled>
+                                        <label class="form-check-label" for="uspsButton"><span id="uspsButtonText">USPS</span></label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="shipperOptions" id="fedexButton" value="fedex" disabled>
+                                        <label class="form-check-label" for="fedexButton"><span id="fedexButtonText">FedEx</span></label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="shipperOptions" id="dhlButton" value="dhl" disabled>
+                                        <label class="form-check-label" for="dhlButton"><span id="dhlButtonText">DHL</span></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="priceInput" class="col-sm-4 col-form-label">
+                                Confirm delivery
+                            </label>
+                            <div class="col-sm-8">
+                                <button id="confirmButton" type="button" class="btn btn-outline-primary" disabled>Confirm delivery</button>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="priceInput" class="col-sm-4 col-form-label">
+                                Claim funds
+                            </label>
+                            <div class="col-sm-8">
+                                <button id="claimButton" type="button" class="btn btn-outline-primary" disabled>Claim funds</button>
+                                <small class="form-text text-muted">This can only be done 10 days after delivery.</small>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div id="progressWrapper" class="progress align-self-center w-100">
+                                <div id="progress" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+                                    aria-valuemax="100" style="width: 0%">
+                                    <a target="_blank" id="progressLink"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
